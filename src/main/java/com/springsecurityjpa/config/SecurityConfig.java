@@ -33,6 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/user").hasAnyRole("ADMIN", "USER")
 		.antMatchers("/").permitAll()
 		.and().formLogin();
+		
+		http.sessionManagement().maximumSessions(1);
+		
+		// Logout
+					http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID")
+							.permitAll();
 	}
 	
 	
